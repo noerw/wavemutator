@@ -1,64 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>wavemutator</title>
+    <meta name="description" content="create custom waveforms & save them in wav samples!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <title>wavemutator by noerw</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="vendor/modernizr-2.8.3.min.js"></script>
   </head>
-
   <body>
+    <!--[if lt IE 9]>
+      <p class="browserupgrade">You are using a shitty browser that doesnt support web audio.</p>
+    <![endif]-->
 
-    <header>
-      <div class="container">
-        <h1>wavemutator</h1>
-        <h2>create custom waveforms in you browser &amp; save them as wav sample!</h2>
+    <div class="row"> <h4 id="msg"></h4> </div>
 
-        <section id="downloads">
-          <a href="https://github.com/noerw/wavemutator/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/noerw/wavemutator/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/noerw/wavemutator" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
 
-    <div class="container">
-      <section id="main_content">
-        <h1>
-<a id="wavemutator" class="anchor" href="#wavemutator" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>wavemutator</h1>
-
-<p>modify a basic waveform (sine, square, saw) with various mutations in your browser &amp; download the resulting sample!
-requires a browser with webaudio.</p>
-
-<p>sorry for that design.
-ideas &amp; pullrequests welcome!</p>
-
-<h3>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>license</h3>
-
-<p>This tool is published into the public domain under the UNLICENSE.
-Used 3rd-party software and may be licensed under different conditions:</p>
-
-<ul>
-<li>
-<a href="http://www.fontspace.com/brynda1231/agamefont">Agamefont</a>, published into the public domain.</li>
-<li>
-<a href="https://github.com/Jam3/audiobuffer-to-wav">audiobuffer-to-wav</a>, licensed under MIT.</li>
-<li>
-<a href="https://github.com/jquery/jquery">jquery</a>, licensed under MIT.</li>
-</ul>
-
-<h3>
-<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>author</h3>
-
-<p><a href="http://github.com/noerw">noerw</a></p>
-      </section>
+    <div class="row">
+      <p><b>&gt; WAVEFORM</b></p>
+      <button id="play">PLAY</button>
+      <select id="wavetype">
+        <option value="sine">sine</option>
+        <option value="saw">saw</option>
+        <option value="square">square</option>
+        <option value="noise">noise</option>
+      </select>
+      <span style="white-space: nowrap">
+        frequency: <input id="freq" type="range" min="25" max="2000" value="220"/>
+      </span>
+      <span style="white-space: nowrap">
+        volume: <input id="volume" type="range" min="0" max="0.2" value="0.1" step="0.01"/>
+      </span>
+      <p>lower frequency -> higher sample resolution!</p>
     </div>
 
-    
+    <div class="row">
+      <p><b>&gt; MUTATION</b></p>
+      <button id="mutate">START</button>
+      <select id="mutation">
+        <option value="sinify">sinify</option>
+        <option value="squarify">squarify</option>
+        <option value="peakify">peakify</option>
+        <option value="nullify">nullify</option>
+        <option value="offsettify">offsettify</option>
+        <option value="smoothify">smoothify</option>
+        <option value="noisify">noisify</option>
+        <option value="randomizify">randomizify</option>
+      </select>
+      amount: <input id="mutation-amount" type="range" min="0" max="40" value="23"/>
+    </div>
+
+    <div class="row">
+      <p><b>&gt; ANALYZER</b></p>
+      <canvas id="sampleviewer"width="500px" height="300px"></canvas>
+    </div>
+
+    <div class="row">
+      <button id="export">EXPORT WAVEFORM 2 WAV</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="vendor/jquery-1.11.3.min.js"><\/script>')</script>
+    <script src="vendor/audiobuffer-to-wav.js"></script>
+    <script src="wavemutator.js"></script>
   </body>
 </html>
